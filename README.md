@@ -11,6 +11,8 @@ This repository contains a compiled binary of [odin-c-bindgen](https://github.co
 
 - Odin naming convention for types and procedures
 - Init_Flags as bit_set
+- Basic subtype polimorphism for ``Audio_Source`` and ``Filter`` derived structures
+  - This allows functions that expect ``^Audio_Source`` to receive ``^Speech`` and other compatible types. Safer than rawptr as it avoids passing certain types
 
 # Repository structure
 

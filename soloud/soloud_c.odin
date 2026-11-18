@@ -125,40 +125,6 @@ Soloud_Enums :: enum i32 {
 	WAVESHAPERFILTER_AMOUNT        = 1,
 }
 
-// Object handle typedefs
-Aligned_Float_Buffer      :: rawptr
-Tiny_Aligned_Float_Buffer :: rawptr
-Soloud                    :: rawptr
-Ay                        :: rawptr
-Audio_Collider            :: rawptr
-Audio_Attenuator          :: rawptr
-Audio_Source              :: rawptr
-Bassboost_Filter          :: rawptr
-Biquad_Resonant_Filter    :: rawptr
-Bus                       :: rawptr
-Dcremoval_Filter          :: rawptr
-Echo_Filter               :: rawptr
-Fader                     :: rawptr
-Fftfilter                 :: rawptr
-Filter                    :: rawptr
-Flanger_Filter            :: rawptr
-Freeverb_Filter           :: rawptr
-Lofi_Filter               :: rawptr
-Monotone                  :: rawptr
-Noise                     :: rawptr
-Openmpt                   :: rawptr
-Queue                     :: rawptr
-Robotize_Filter           :: rawptr
-Sfxr                      :: rawptr
-Speech                    :: rawptr
-Ted_Sid                   :: rawptr
-Vic                       :: rawptr
-Vizsn                     :: rawptr
-Wav                       :: rawptr
-Wave_Shaper_Filter        :: rawptr
-Wav_Stream                :: rawptr
-File                      :: rawptr
-
 @(default_calling_convention="c")
 foreign lib {
 	/*
@@ -1251,6 +1217,7 @@ foreign lib {
 }
 
 
+// Only Miniaudio is supported. Other backend haven't been tested
 Backend :: enum u32 {
     AUTO           = 0,
     SDL1           = 1,
@@ -1279,3 +1246,115 @@ Init_Flag :: enum u32 {
 }
 
 Init_Flags :: bit_set[Init_Flag; u32]
+
+// Independent opaque types
+Aligned_Float_Buffer      :: struct {}
+Tiny_Aligned_Float_Buffer :: struct {}
+
+Soloud :: struct {}
+
+Audio_Collider    :: struct {}
+Audio_Attenuator  :: struct {}
+
+Fader :: struct {}
+File  :: struct {}
+
+
+// Audio source hierarchy
+Audio_Source :: struct {}
+
+Ay :: struct {
+    using audio_source: Audio_Source,
+}
+
+Bus :: struct {
+    using audio_source: Audio_Source,
+}
+
+Monotone :: struct {
+    using audio_source: Audio_Source,
+}
+
+Noise :: struct {
+    using audio_source: Audio_Source,
+}
+
+Openmpt :: struct {
+    using audio_source: Audio_Source,
+}
+
+Queue :: struct {
+    using audio_source: Audio_Source,
+}
+
+Sfxr :: struct {
+    using audio_source: Audio_Source,
+}
+
+Speech :: struct {
+    using audio_source: Audio_Source,
+}
+
+Ted_Sid :: struct {
+    using audio_source: Audio_Source,
+}
+
+Vic :: struct {
+    using audio_source: Audio_Source,
+}
+
+Vizsn :: struct {
+    using audio_source: Audio_Source,
+}
+
+Wav :: struct {
+    using audio_source: Audio_Source,
+}
+
+Wav_Stream :: struct {
+    using audio_source: Audio_Source,
+}
+
+
+// Filter hierarchy
+Filter :: struct {}
+
+Fftfilter :: struct {
+    using filter: Filter,
+}
+
+Bassboost_Filter :: struct {
+    using fft_filter: Fftfilter,
+}
+
+Biquad_Resonant_Filter :: struct {
+    using filter: Filter,
+}
+
+Dcremoval_Filter :: struct {
+    using filter: Filter,
+}
+
+Echo_Filter :: struct {
+    using filter: Filter,
+}
+
+Flanger_Filter :: struct {
+    using filter: Filter,
+}
+
+Freeverb_Filter :: struct {
+    using filter: Filter,
+}
+
+Lofi_Filter :: struct {
+    using filter: Filter,
+}
+
+Robotize_Filter :: struct {
+    using filter: Filter,
+}
+
+Wave_Shaper_Filter :: struct {
+    using filter: Filter,
+}
